@@ -1,4 +1,4 @@
-export default class WordBreakDown {
+export default class WWapp {
   constructor(words) {
     this.self = this
     this.apiHost = ((env) => {
@@ -10,10 +10,21 @@ export default class WordBreakDown {
     })(process.env.NODE_ENV)
   }
 
-  getTopWord() {
+  static getTopWord() {
     return fetch(`${this.apiHost}top_word`)
     .then(response => response.json())
     .then(topWord =>  topWord )
+    .catch(error => console.dir(error))
+  }
+
+  static postWords() {
+    return fetch(`${this.apiHost}words`, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: { word: { value: words }}
+    })
+    .then(response => response.json())
+    .then(words => words)
     .catch(error => console.dir(error))
   }
 }
